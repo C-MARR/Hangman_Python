@@ -6,3 +6,8 @@ def show_hidden_word(correct_word, guesses):
         else:
             hidden_word.append(correct_word[index])
     return "".join(hidden_word)
+
+
+def show_results(wins, loses):
+    print(f"You won: {wins} times.")
+    print(f"You lost: {loses} times.")
