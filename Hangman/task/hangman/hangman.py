@@ -1,13 +1,26 @@
 import random
+import hangman_functions
 
-print("H A N G M A N")
 words = ("python", "java", "swift", "javascript")
 correct_word = random.choice(words)
-hidden_word = []
-for char in range(len(correct_word)):
-    if char > 2:
-        hidden_word.append("-")
-    else:
-        hidden_word.append(correct_word[char])
-guess = input(f'Guess the word: {"".join(hidden_word)}')
-print("You survived!" if guess == correct_word else "You lost!")
+guesses = set()
+attempts = 8
+game_over = False
+
+print(f"H A N G M A N # {attempts} attempts\n")
+
+while attempts > 0 and not game_over:
+    print(hangman_functions.show_hidden_word(correct_word, guesses))
+    guess = input("Input a letter: ").lower()
+    guesses.add(guess)
+    attempts -= 1
+    if len(guess) != 1 or guess not in correct_word:
+        print(f"\nThat letter doesn't appear in the word.  # {attempts} attempts\n")
+    elif guess in correct_word:
+        print(f" # {attempts} attempts\n")
+        # if set(guesses).issuperset(correct_word):
+        #     game_over = True
+
+print("Thanks for playing!")
+
+
